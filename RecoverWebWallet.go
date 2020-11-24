@@ -10,7 +10,7 @@ import (
 
 func main() {
 	var xPrivKey string
-	fmt.Print("Enter text: ")
+	fmt.Print("Enter web wallet xPrivKey: ")
 	fmt.Scanln(&xPrivKey)
 	key, err := hdkeychain.NewKeyFromString(xPrivKey)
 
