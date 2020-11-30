@@ -5,14 +5,18 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/btcsuite/btcutil/hdkeychain"
+	// "github.com/btcsuite/btcutil/hdkeychain"
+
+	"github.com/decred/dcrd/chaincfg/v3"
+	"github.com/decred/dcrd/hdkeychain/v3"
 )
 
 func main() {
 	var xPrivKey string
 	fmt.Print("Enter web wallet xPrivKey: ")
 	fmt.Scanln(&xPrivKey)
-	key, err := hdkeychain.NewKeyFromString(xPrivKey)
+	net := chaincfg.MainNetParams()
+	key, err := hdkeychain.NewKeyFromString(xPrivKey, net)
 
 	if err != nil {
 		log.Fatal(err)
@@ -28,6 +32,6 @@ func main() {
 		return
 	}
 
-	privKey, err := key.ECPrivKey()
-	fmt.Printf("Hex seed: %s\n", hex.EncodeToString(privKey.Serialize()))
+	privKey, err := key.SerializedPrivKey()
+	fmt.Printf("Hex seed: %s\n", hex.EncodeToString(privKey))
 }
